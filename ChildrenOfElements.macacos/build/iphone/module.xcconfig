@@ -1,0 +1,4 @@
+// this is a generated file - DO NOT EDIT
+
+COM_ONECOWSTANDING_FLURRY_OTHER_LDFLAGS=$(inherited) -framework Security
+OTHER_LDFLAGS=$(inherited) $(COM_ONECOWSTANDING_FLURRY_OTHER_LDFLAGS) 
