@@ -1,0 +1,42 @@
+<Alloy>
+	<Window class="container"  > 
+	
+		<View id="contentSelect">			
+		</View>
+
+		<!--
+		<View id="">
+
+		</View>
+		-->
+
+		<View id="bookshelf_toolBar">
+			<ImageView id="toolbar_button_mute" onClick="toggleAudio" image="/bookshelf/bookshelf_navigator_sound.png"></ImageView>
+			<ImageView id="toolbar_button_suscribe" onClick="suscribe" image="/bookshelf/bookshelf_navigator_suscribe.png"></ImageView>
+			<ImageView id="toolbar_button_home" onClick="openFaceBook" image="/bookshelf/bookshelf_navigator_home.png"></ImageView>
+
+		</View>
+		
+		<ImageView image="/bookshelf/bookshelf_buton_play_bw.png" id="bookshelf_play" > </ImageView>
+
+		
+		<ImageView id="thumbnail"> </ImageView>
+		<ImageView id="thumbnailPre"> </ImageView>
+		
+		
+		<View id="aboutImage" backgroundColor="#55FFFFFF" opacity="0" >
+		
+			<View backgroundImage="/about/aboutScreen_window.png" width="814" height="569" >
+				<Label id="aboutText"></Label>
+			</View>	
+			
+
+		</View>
+
+		<!--
+			<ImageView id="thumbnail"> </ImageView>
+		<ImageView id="nepe" > </ImageView>
+		-->
+		
+	</Window>
+</Alloy>

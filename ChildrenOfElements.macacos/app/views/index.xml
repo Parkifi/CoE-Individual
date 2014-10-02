@@ -1,0 +1,17 @@
+
+<Alloy>
+ 
+	<Window class="container" fullscreen="true" >
+
+		<!--
+		The planets were temporally removed for first release
+
+		<Window class="container" onOpen="playLoopAudio" onClose="stopLoopAudio">
+		<View id="north" onClick="onSelectPlanet" preferedRotationBase="-180"></View>
+		<View id="east"  onClick="onSelectPlanet" preferedRotationBase="90"></View>
+		<View id="west"  onClick="onSelectPlanet" preferedRotationBase="-90"></View>
+		<View id="south" onClick="onSelectPlanet" preferedRotationBase="0"></View>
+		--->
+
+	</Window>
+</Alloy>

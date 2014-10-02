@@ -1,0 +1,35 @@
+<Alloy>
+	<Window class="container"> 
+
+		<View id="storyStage"> </View>
+ 
+ 		<View id="navBar">
+
+ 			
+
+ 			<View id="menuElements">
+
+ 				
+
+				<View onClick="toggleSpeech" id="speech"></View>
+				<View onClick="toggleAudio" id="audio"></View>
+
+				
+				<View  onClick="toggleHints" id="hints"></View>
+				<View  onClick="exitStory" id="home"></View>
+				
+		
+
+ 			</View>
+
+ 			
+			
+ 		</View>
+ 		<View onClick="back" id="back" zIndex="100"></View>
+ 		<View onClick="next" id="next" zIndex="100"></View>
+ 		<View id="anchor" onClick="toggleMenu" zIndex="100"></View>
+
+ 	
+
+	</Window>
+</Alloy>

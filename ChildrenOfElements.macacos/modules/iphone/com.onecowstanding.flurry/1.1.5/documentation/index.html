@@ -1,0 +1,179 @@
+<h1>Flurry Module</h1>
+<h2>Description</h2>
+<p>Module for integrating with the <a href="http://www.flurry.com/">Flurry</a> event tracking service. This module supports both the
+iOS and Android Flurry SDKs. You need a Flurry account and application apiKey(s) to use this module.</p>
+<p>The Flurry iOS and Android SDKs are not 100% feature equivalent. Where there are methods/properties in each SDK that
+perform a common function, this module presents a normalized method/property name. If you only use these normalized
+methods, then you will not need to have platform-specific code in your application (other than configuring a different
+apiKey for the iOS and Android versions of your app). If you choose to use a method that is only supported on one
+platform or the other, you may safely call these methods without having to wrap them in an application-specific block.
+The method will simply do nothing if it is not supported on a particular platform. See the documentation details for a
+breakdown of each method/property. Many methods/properties have aliases that come from corresponding name differences
+in the Flurry iOS and Android SDKs. Either the primary property name or its alias can be used in the JavasScript for
+your app, regardless of platform.</p>
+<h2>Usage</h2>
+<p>Add the following to the modules section in <code>tiapp.xml</code>:</p>
+<pre><code>&lt;modules&gt;
+    . . .
+    &lt;module platform="android" version="1.1.5"&gt;com.onecowstanding.flurry&lt;/module&gt;
+    &lt;module platform="iphone" version="1.1.5"&gt;com.onecowstanding.flurry&lt;/module&gt;
+    . . .
+&lt;/modules&gt;
+</code></pre>
+<p>Basic setup:</p>
+<pre><code>var Flurry = require("com.onecowstanding.flurry");
+// configure pre-session settings
+Flurry.startSession('00000000000000000000');
+// log user information and events
+</code></pre>
+<p>See app.js for more detailed examples.</p>
+<h2>Pre-Session Configuration Properties</h2>
+<p>These should be set prior to calling <code>startSession()</code>.</p>
+<h3>(string) appVersion  (alias: versionName)</h3>
+<p>(optional) Specifies a specific version of your application.</p>
+<h3>(bool) reportLocation</h3>
+<p>(Android only) Specifies whether Flurry should include location information within its reports. Defaults to true.</p>
+<h3>(bool) showErrorInLogEnabled</h3>
+<p>(iOS only) Enables/disables display of exceptions in the debug log if thrown during a session. Defaults to false.</p>
+<h2>(bool) debugLogEnabled  (alias: logEnabled)</h2>
+<p>Enables/disables additional debug logging. Defaults to false.</p>
+<h2>(bool) eventLoggingEnabled  (alias: logEvents)</h2>
+<p>Enables/disables whether events that are sent to Flurry are written to the log. Defaults to false.</p>
+<h2>(string) logLevel</h2>
+<p>Specifies the logging level. There are different valid values for Android and iOS (this is at the Flurry SDK level). Use
+conditional logic in your application if you wish to set this value. The following are valid values for this setting:
+  (Android) verbose, debug, info, warn, error, assert
+  (iOS) none, criticalOnly, debug, all</p>
+<h2>(int) sessionContinueSeconds</h2>
+<p>Specifies the number of seconds before an additional <code>startSession()</code> call results in a new session. Calling
+<code>startSession()</code> a second time within the time specified by this setting will result in the previous session being
+continued. A call to <code>startSession()</code> after this amount of time has elapsed will result in a new session being created.
+The minimum timeout for a session is 5 seconds. Defaults to 10 seconds.</p>
+<h2>(int) continueSessionMillis</h2>
+<p>This property configures the same setting as <code>sessionContinueSeconds</code>, however the value passed is specified in
+milliseconds rather than seconds. On Android, you can use this method to configure a value with millisecond precision.
+The Flurry SDK for iOS does not support this precision, so if you use this property on iOS and specify a value that is
+not evenly divided by 1000, the property will be rounded to the nearest resulting second.</p>
+<h3>(bool) secureTransportEnabled  (alias: useHttps)</h3>
+<p>Specifies whether SSL should be used when calls are made to the Flurry API. Defaults to false.</p>
+<h3>(bool) sessionReportsOnCloseEnabled</h3>
+<p>(iOS only) Enables/disables reporting to Flurry when your app closes. This improves the speed at which analytics are
+updated, however network latency can prolong the app termination process. In some cases, network latency can cause your
+app to crash. Defaults to true.</p>
+<h3>(bool) sessionReportsOnPauseEnabled</h3>
+<p>(iOS only) Enables/disables reporting to Flurry when your app is paused (i.e. goes into the background). This improves
+the speed at which analytics are updated, however network latency can prolong the app termination process. In some cases,
+network latency can cause your app to crash. Defaults to false.</p>
+<h3>(bool) backgroundSessionEnabled</h3>
+<p>(iOS only) Enables/disables ending the Flurry session when your app goes into the background. When set to true, the Flurry
+session remains active even when your app is in the background. This can be useful if your app does work in the background
+that you want to track. Flurry documents this as suitable for music and radio apps. Defaults to false.</p>
+<h3>(bool) crashReportingEnabled</h3>
+<p>(iOS only) Enables/disables automatic collection and reporting of crash reports. Defaults to false.</p>
+<h2>(bool) sessionReportsOnActivityChangeEnabled</h2>
+<p>(Android only) Specifies whether or not the module should automatically monitor your app for Android lifecycle events and
+trigger Flurry start/end session calls automatically when Android activities in your app are paused or resumed. If this
+property is set to true, the first time startSession() is called the module will begin monitoring your app for Android
+Activity changes (in Titanium, a different Android Activity is typically associated with each instance of a heavyweight
+window). When the Android lifecycle 'onResume' event triggers on any activity monitored by the module, a startSession() call
+is sent to Flurry. When the Android lifecycle 'onPause' event triggers on any activity monitored by the module, an
+endSession() call is sent to Flurry. The module will attempt to listen for these lifecycle events on the activity that was
+current when the first call to startSession() was made, as well as any additional activities that spawn from that activity.
+Therefore, if you plan on using this feature, it is recommended that you initialize the module and make a call to
+startSession() when your app first fires up (in app.js, for instance). If this property is set to false, or
+if it is set to true and you make additional startSession() calls, those session starts will be associated with the current
+activity at the time of the call. It is important that for each startSession() call in an activity that there be a matching
+endSession() call in that activity, otherwise session reports may not be sent correctly to Flurry. If you do not want to
+manage startSession() and endSession() calls manually on Android, it is recommended that you set this property to true.
+Defaults to false.</p>
+<h2>Session Functions</h2>
+<h3>startSession(string apiKey)  (alias: onStartSession)</h3>
+<p>Starts your Flurry session. You must the Flurry apiKey for your application. Usually iOS and Android applications are
+configured separately in Flurry, so you may want to make this property configurable, depending on the platform.</p>
+<h3>endSession()  (alias: onEndSession)</h3>
+<p>(Android only) Explicitly specifies the end of a session on Android. Application close and pause events can be tracked
+automatically on iOS (see the <code>sessionReportsOnCloseEnabled</code> and <code>sessionReportsOnPauseEnabled</code> properties) however this
+is not supported on Android. If you have a point in your application where you want to explicitly specify an end to the
+tracking session, you may call this function. This method has no effect when called on iOS.</p>
+<h2>Event and Error Logging Functions</h2>
+<h3>logEvent(string event[, dictionary parameters])</h3>
+<p>Logs a custom event to Flurry. The first parameter is the event name (can be anything you want) and is required. The
+maximum length of an event name is 255 characters. An application can have up to 300 different event types in Flurry. You
+can also optionally pass a second argument with a dictionary of parameter names and values (just use a simple Javascript
+object). You can use this to send additional data with a particular event, taking care not to expose any sensitive user
+information. The parameters object can only contain a maximum of 10 keys. Attempting to send more than 10 keys will
+result in the event being logged as if no parameters were sent (i.e. everything is discarded). Both the parameter keys
+and values should be serializable.</p>
+<h3>logTimedEvent(string event[, dictionary parameters])</h3>
+<p>Same as <code>logEvent()</code>, but tracks the beginning of a timed event.</p>
+<h3>endTimedEvent(string event[, dictionary properties])</h3>
+<p>Use this method to end a timed event that was started with <code>logTimedEvent()</code>. The event name (and any optional parameters)
+should match what was used to start the timed event.</p>
+<h3>logError(string error, string message)  (alias: onError)</h3>
+<p>You can use this method to log when an error occurs in your application. Use the first parameters as an error code/type,
+and the second parameter as a custom error message.</p>
+<h2>Page View Functions</h2>
+<h3>logAllPageViews()</h3>
+<p>(iOS only) Enables the Flurry agent to automatically detect and log page views. A page view is defined as traversing a
+UINavigationController or UITabBarController. The page view count is only a counter for the number of transitions in your
+app. It does not associate a name with the page count. This only needs to be called in your application once.</p>
+<h3>pauseBackgroundSession()</h3>
+<p>(iOS only) This method is useful when setBackgroundSessionEnabled is set to true. It can be called when your application
+has finished all background tasks (such as playing music) to pause session. If the app is resumed before time specified in
+setSessionContinueSeconds, the session will continue, otherwise a new session will begin.</p>
+<h3>logPageView()</h3>
+<p>Used to manually log a page view, typically some kind of transition in your application.</p>
+<h2>User Info Functions</h2>
+<h3>setUserId(string userId)  (alias: setUserID)</h3>
+<p>Use this to log an identifying id or username for a user, as defined by your application.</p>
+<h3>setAge(int age)</h3>
+<p>Use this to log the age of a user. Valid values are 0 or greater.</p>
+<h3>setGender(string gender)</h3>
+<p>Use this to log the gender of a user. Valid values are 'm' for male and 'f' for female.</p>
+<h2>Location Reporting Functions</h2>
+<h3>recordLocation(dictionary parameters)</h3>
+<p>(iOS only) This allows you to record the current location of a user. Flurry only keeps track of the last location specified
+per session. Regardless of accuracy specified, the Flurry SDK will only report location at city level or higher. Location
+is aggregated across all users of your app and not available on a per user basis.
+CAUTION: If your app does not use location services in a meaningful way, accessing the user's location may result in your
+app submission to the Apple App Store being rejected. Only use this method if you are already using location services for
+some other purpose (i.e. do not enable location services just for tracking in Flurry).</p>
+<p>The dictionary parameters object should contain the following keys:</p>
+<ul>
+<li>float latitude</li>
+<li>float longitude</li>
+<li>float horizontalAccuracy</li>
+<li>float verticalAccuracy</li>
+</ul>
+<h2>Author</h2>
+<p>One Cow Standing</p>
+<h2>Changelog</h2>
+<p>1.1.5   Upgraded to Flurry iPhone SDK v4.3.2
+        Upgraded to Flurry Android SDK vAndroid 3.3.4</p>
+<p>1.1.4   Upgraded to Flurry iPhone SDK v4.3.0
+        Upgraded to Flurry Android SDK vAndroid 3.3.0</p>
+<p>1.1.3   Added hooks for backgroundSessionEnabled and pauseBackgroundSession (iOS only)
+        Added hook for crashReportingEnabled (iOS only)
+        Setting the logLevel is now supported on iOS, but with different valid values than Android (see documentation)
+        Upgraded to Flurry Android SDK vAndroid 3.2.2
+        Updated module configuration to avoid linking errors in iOS builds when using certain (older) Titanium SDK versions</p>
+<p>1.1.2   Upgraded to Flurry iPhone SDK v4.2.3
+        Upgraded to Flurry Android SDK vAndroid 3.2.1</p>
+<p>1.1.1   Upgraded to Flurry iPhone SDK v4.1.0
+        Upgraded to Flurry Android SDK vAndroid 3.1.0</p>
+<p>1.1     Added the sessionReportsOnActivityChangeEnabled configuration parameter for Android (see documentation above). Setting
+        this property to true will enable the module to monitor Android Activity changes in your app and make contextual
+        start/end session calls to Flurry when an activity change occurs. This release also removes a prior behavior of always
+        making a call to end the Flurry session when the onStop() event fired on the activity under which the module was initialized.</p>
+<p>1.0.1   Documentation and packaging updates</p>
+<p>1.0     Initial Release
+        - Supports Flurry iPhone SDK v4.0.6
+        - Supports Flurry Android SDK vAndroid 3.0.5</p>
+<h2>Feedback and Support</h2>
+<p>Please direct all questions, feedback, and concerns to <a href="mailto:support@onecowstanding.com?subject=Flurry%20Titanium%20Module">support@onecowstanding.com</a>.</p>
+<h2>License</h2>
+<p>Copyright(c) 2012 by One Cow Standing, LLC. All Rights Reserved.</p>
+<p>If you require special licensing terms, including (but not limited to): education licensing, open source project licensing, bulk licensing, source code access, please contact:
+<a href="mailto:support@onecowstanding.com?subject=Flurry%20Titanium%20Module%20Licensing">support@onecowstanding.com</a>.</p>
+<p>Flurry is Copyright(c) 2012 by Flurry, Inc.</p>
+<p>Usage of this module is subject to the <a href="http://www.flurry.com/tos.html">Terms of Service</a> agreement of Flurry, Inc.</p>

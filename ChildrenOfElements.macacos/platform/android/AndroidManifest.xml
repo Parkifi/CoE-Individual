@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.childrenofelements.mvp" android:versionCode="5" android:versionName="1.5">
+	<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
+	<supports-screens android:smallScreens="false" android:normalScreens="false" android:largeScreens="false" android:xlargeScreens="true"/>
+	<compatible-screens>
+		<screen android:screenSize="xlarge" android:screenDensity="ldpi"/>
+		<screen android:screenSize="xlarge" android:screenDensity="mdpi"/>
+		<screen android:screenSize="xlarge" android:screenDensity="hdpi"/>
+		<screen android:screenSize="xlarge" android:screenDensity="xhdpi"/>
+	</compatible-screens>
+	<application android:icon="@drawable/appicon" android:label="@string/appname" android:name="Childrenoftheelements_androidApplication" android:debuggable="false">
+		<activity android:name=".Childrenoftheelements_androidActivity" android:label="@string/appname" android:theme="@style/Theme.Titanium" android:screenOrientation="landscape" android:configChanges="keyboardHidden">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+		</activity>
+		<activity android:name="org.appcelerator.titanium.TiActivity" android:screenOrientation="landscape" android:configChanges="keyboardHidden"/>
+		<activity android:name="org.appcelerator.titanium.TiTranslucentActivity" android:screenOrientation="landscape" android:configChanges="keyboardHidden" android:theme="@android:style/Theme.Translucent"/>
+		<activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity"/>
+		<service android:name="org.appcelerator.titanium.analytics.TiAnalyticsService" android:exported="false"/>
+	</application>
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.INTERNET"/>
+</manifest>

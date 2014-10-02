@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.1.5
+apiversion: 2
+description: Flurry analytics module
+author: One Cow Standing
+license: Commercial
+copyright: Copyright (c) 2012 by One Cow Standing, LLC
+
+
+# these should not be edited
+name: flurry
+moduleid: com.onecowstanding.flurry
+guid: 79a496e1-c3d4-46e9-9b1a-74cfc182593e
+platform: android
+minsdk: 2.1.3.GA

@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+iosLaunchConfigurationAttributes/ATTR_MINIFY=true
+iosLaunchConfigurationAttributes/ATTR_PROJECT_NAME=Macacos Individual
+iosLaunchConfigurationAttributes/appid=org.childrenofelements.macacos
+iosLaunchConfigurationAttributes/certificate=Gyula Simonyi (9644AK9SZ6)
+iosLaunchConfigurationAttributes/distribute_path=/Users/talamh/Desktop/packages/1.7
+iosLaunchConfigurationAttributes/keychain=
+iosLaunchConfigurationAttributes/output_format=ipa
+iosLaunchConfigurationAttributes/sdk_version=7.1
+iosLaunchConfigurationAttributes/uuid=20fdf5c0-7334-4c04-8dbc-64ba505df91f

@@ -1,0 +1,88 @@
+".container":{
+	backgroundColor:"#ffffff",
+},
+"Button":{
+	backgroundColor:"#ffffff",
+},
+"#navBar":{
+	height:110,
+	top:0
+},
+"#navBar[platform=android]":{
+	touchEnabled:false
+},
+"#menuElements":{
+	height:110,
+	top:-160,
+	width:530
+},
+"#menuElements[platform=android]":{
+	touchEnabled:false
+},
+"#back":{
+	left:0,
+	top:0,
+	width:107,
+	height:99,
+	backgroundImage:"/menu/button_prev.png",
+	top: -200,
+},
+"#next":{
+	right:0,
+	top:0,
+	width:110,
+	height:100,
+	backgroundImage:"/menu/button_next.png"
+	
+},
+"#speech":{
+	left:7,
+	top:0,
+	width:108,
+	height:95,
+	backgroundImage:"/menu/button_speech.png"
+},
+"#audio":{
+	left:115,
+	top:0,
+	width:98,
+	height:97,
+	backgroundImage:"/menu/button_sound.png"	
+},
+"#anchor":{
+	top:0,
+	width:109,
+	height:98,
+	backgroundImage:"/menu/button_anchor.png"
+},
+"#hints":{
+	top:0,
+	left:318,
+	width:110,
+	height:99,
+	backgroundImage:"/menu/button_hints.png"
+},
+"#home":{
+	top:0,
+	left:419,
+	width:98,
+	height:93,
+	backgroundImage:"/menu/bookshelf_navigator_home.png"
+},
+"#bookshelf_play":{
+	visible:0
+},
+"#loading":{
+	zIndex:100,
+	backgroundColor:"blue",
+	width:"100%",
+	height:"100%", 
+	top:0,
+	opacity:0.5,
+	left:0
+},
+"#loadBar":{
+	backgroundColor:"green",
+	width:300,
+	height:30,
+}
